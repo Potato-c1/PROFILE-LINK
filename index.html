@@ -22,15 +22,19 @@
   
   hr { margin: 1em -1em 0em -1em; }
   
-  a { color: #77aaff; }
+  a { color: #7788ff; }
   
   ul { margin-left: -3em; font-size: 0.65em; line-height: 1.65em; }
   
-  header { display: flex; justify-content: center; align-items: center; background: #222222; background: linear-gradient( to top right, #000000, #333333 ); padding: 0.5em; margin: -1em -1em 0 -1em; border-bottom: 0.5em solid #ffffff; }
+  header { display: flex; justify-content: center; gap: 1em; background: #222222; background: linear-gradient( to top right, #000000, #333333 ); padding: 1rem 0.5rem 0.5rem 0.5rem; margin: -1em -1em 0 -1em; border-bottom: 0.5em solid #ffffff; }
   
   img { height: 5em; width: 5em; border-radius: 50%; }
   
   section { display: flex; flex-direction: column; background: #111111; border: 1px solid #ffffff ; margin-top: 2em; margin-bottom: 2em; color: #ffffff; padding: 1em; border-radius: 15px; height: 10em; width: 18em; }
+  
+  #head2 { align-self: flex-end; }
+  
+  #yinyang { padding: 0 0.4em 0 0.4em; border-radius: 50%; background: #889988; }
   
   #headerbackground { display: flex; background: #77aaff; background: linear-gradient( to top right, #1133aa, #77aaff ); justify-content: center; align-items: center; border-radius: 50%; padding: 1.5em; border: 3px solid #4488ee; gap: 3em; }
   
@@ -49,9 +53,15 @@
   <body>
     
    <header>
+    <div id="head1">
      <div id="headerbackground">
      <img id="headimg" src="Images/Potato.png">
      <h1>Potato's Socials</h1>
+     </div>
+     </div>
+         <div id="head2">
+     <div id="yinyang">🌙</div>
+     </div>
      </div>
    </header> 
    
@@ -114,6 +124,59 @@
      </section>
      
    </main>
+   
+   <script>
+     const yinyang = document.getElementById('yinyang');
+     const body = document.body
+     const sections = document.querySelectorAll('section');
+     const horizontalline = document.querySelectorAll('hr');
+     const link = document.querySelectorAll('a')
+     const header = document.querySelectorAll('header');
+     const head = document.getElementById('headerbackground');
+     let bg = true
+     
+     yinyang.addEventListener('mouseover', () => { yinyang.style.background = '#888899'; });
+     yinyang.addEventListener('mouseout', () => { yinyang.style.background = '';});
+     yinyang.addEventListener('click', () => { if (bg) { body.style.background = 'linear-gradient(to top, #665566, #fefffe)'; 
+     
+     yinyang.innerText = '☀️'; 
+     
+     yinyang.style.background = '#998899';
+     
+       head.style.background = 'linear-gradient(to top right, #556655, #99aa99'; head.style.borderColor = '#99bb99';
+     
+       sections.forEach( section => { section.style.background = '#889988'; section.style.color = '#000000'; section.style.borderColor = '#000000';});
+       
+      horizontalline.forEach( hr => { hr.style.borderColor = '#000000';
+       });
+       
+       link.forEach( a => { a.style.color = '#880077'; });
+       
+       header.forEach( header => { header.style.background = 'linear-gradient( to top right, #554455, #889988)'; header.style.borderColor = '#889988'; });
+       
+       
+     }
+      else { body.style.background = 'linear-gradient(to top, #000000, #555555)'; 
+      
+      yinyang.innerText = '🌙'; 
+      
+      yinyang.style.background = '#889988';
+      
+      head.style.background = 'linear-gradient(to top right, #1133aa, #77aaff '; head.style.borderColor = '#4488ee';
+      
+        sections.forEach( section => { section.style.background = '#000000'; section.style.color = '#ffffff'; section.style.borderColor = '#ffffff'; });
+        
+        horizontalline.forEach( hr => { hr.style.borderColor = '#ffffff';
+       });
+       
+       link.forEach( a => { a.style.color = '#7788ff'; });
+       
+       header.forEach( header => { header.style.background = 'linear-gradient( to top right, #000000, #555555)'; header.style.borderColor = '#ffffff'; });
+  
+      }
+     bg = !bg;});
+     
+   </script>
     
   </body>
   
