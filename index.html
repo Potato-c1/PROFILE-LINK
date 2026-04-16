@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <style>
     
+    body::before, body::after { content: ""; position: fixed; inset: 0; transition: opacity 1s ease; z-index: -1; }
+    
+    body::before { background: linear-gradient( to top, #000000, #555555); opacity: 1; }
+    
+    body::after { background: linear-gradient( to top, #665566, #fefffe); opacity: 0; }
+    
    main >  { display: flex; flex-direction: column; width: auto; justify-content: center; }
   
     main { display: flex; flex-direction: column; align-items: center; }
@@ -18,25 +24,27 @@
      
     @media (orientation: landscape) { section { margin-left: 1em; margin-right: 1em;  } }
       
-  body { background: #555555; background: linear-gradient( to top , #000000 , #555555 ); font-size: clamp(1em,1em,1em); line-height: 2em; }
+  body { background: linear-gradient( to top , #000000 , #555555 ); font-size: clamp(1em,1em,1em); line-height: 2em; }
   
-  hr { margin: 1em -1em 0em -1em; }
+  hr { margin: 1em -1em 0em -1em; transition: 0.6s; }
   
-  a { color: #7788ff; }
+  a { color: #7788ff; transition: 1s; }
   
   ul { margin-left: -3em; font-size: 0.65em; line-height: 1.65em; }
   
-  header { display: flex; justify-content: center; gap: 1em; background: #222222; background: linear-gradient( to top right, #000000, #333333 ); padding: 1rem 0.5rem 0.5rem 0.5rem; margin: -1em -1em 0 -1em; border-bottom: 0.5em solid #ffffff; }
+  header { display: flex; justify-content: center; gap: 1em; background: #222222; background: linear-gradient( to top right, #000000, #333333 ); padding: 1rem 0.5rem 0.5rem 0.5rem; margin: -1em -1em 0 -1em; border-bottom: 0.5em solid #ffffff; transition: all 0.5s; }
   
   img { height: 5em; width: 5em; border-radius: 50%; }
   
-  section { display: flex; flex-direction: column; background: #111111; border: 1px solid #ffffff ; margin-top: 2em; margin-bottom: 2em; color: #ffffff; padding: 1em; border-radius: 15px; height: 10em; width: 18em; }
+  section { display: flex; flex-direction: column; background: #111111; border: 1px solid #ffffff ; margin-top: 2em; margin-bottom: 2em; color: #ffffff; padding: 1em; border-radius: 15px; height: 10em; width: 18em; transition: 0.6s; }
   
   #head2 { align-self: flex-end; }
   
-  #yinyang { padding: 0 0.4em 0 0.4em; border-radius: 50%; background: #889988; }
+  #yinyang { padding: 0 0.4em 0 0.4em; border-radius: 50%; background: #999999; transition: 1s; }
   
-  #headerbackground { display: flex; background: #77aaff; background: linear-gradient( to top right, #1133aa, #77aaff ); justify-content: center; align-items: center; border-radius: 50%; padding: 1.5em; border: 3px solid #4488ee; gap: 3em; }
+  #yinyang:hover { background: #888899; }
+  
+  #headerbackground { display: flex; background: #77aaff; background: linear-gradient( to top right, #1133aa, #77aaff ); justify-content: center; align-items: center; border-radius: 50%; padding: 1.5em; border: 3px solid #4488ee; gap: 3em; transition: all 1s; }
   
   #headimg { height: 5em; width: 5em; }
   
@@ -45,6 +53,21 @@
   #info { display: flex; gap: 2em; align-items: center; }
   
   #social { height: 3.5em; width: 3.5em; }
+  
+  body.yang::before { opacity: 0; }
+  body.yang::after { opacity: 1; }
+  
+  body.yang #yinyang { background: #71ACFF; }
+  
+  body.yang #headerbackground { background: linear-gradient(to top right, #556655, #99aa99); border-color: #99bb99; }
+  
+  body.yang header { background: linear-gradient( to top right, #554455, #889988); border-color: #889988; }
+  
+  body.yang section { background: #889988; color: #000000; border-color: #000000; }
+  
+  body.yang a { color: #990066; }
+  
+  body.yang hr { border-color: #000000; }
   
     </style>
     
@@ -128,53 +151,14 @@
    <script>
      const yinyang = document.getElementById('yinyang');
      const body = document.body
-     const sections = document.querySelectorAll('section');
-     const horizontalline = document.querySelectorAll('hr');
-     const link = document.querySelectorAll('a');
-     const header = document.querySelectorAll('header');
-     const head = document.getElementById('headerbackground');
-     let bg = true
      
-     yinyang.addEventListener('mouseover', () => { yinyang.style.background = '#888899'; });
-     yinyang.addEventListener('mouseout', () => { yinyang.style.background = '';});
-     yinyang.addEventListener('click', () => { if (bg) { body.style.background = 'linear-gradient(to top, #665566, #fefffe)'; 
+     yinyang.addEventListener('click', () => { body.classList.toggle("yang");
      
-     yinyang.innerText = '☀️'; 
+     if (body.classList.contains("yang"))
      
-     yinyang.style.background = '#998899';
-     
-       head.style.background = 'linear-gradient(to top right, #556655, #99aa99'; head.style.borderColor = '#99bb99';
-     
-       sections.forEach( section => { section.style.background = '#889988'; section.style.color = '#000000'; section.style.borderColor = '#000000';});
-       
-      horizontalline.forEach( hr => { hr.style.borderColor = '#000000';
-       });
-       
-       link.forEach( a => { a.style.color = '#880077'; });
-       
-       header.forEach( header => { header.style.background = 'linear-gradient( to top right, #554455, #889988)'; header.style.borderColor = '#889988'; });
-       
-       
-     }
-      else { body.style.background = 'linear-gradient(to top, #000000, #555555)'; 
-      
-      yinyang.innerText = '🌙'; 
-      
-      yinyang.style.background = '#889988';
-      
-      head.style.background = 'linear-gradient(to top right, #1133aa, #77aaff '; head.style.borderColor = '#4488ee';
-      
-        sections.forEach( section => { section.style.background = '#000000'; section.style.color = '#ffffff'; section.style.borderColor = '#ffffff'; });
-        
-        horizontalline.forEach( hr => { hr.style.borderColor = '#ffffff';
-       });
-       
-       link.forEach( a => { a.style.color = '#7788ff'; });
-       
-       header.forEach( header => { header.style.background = 'linear-gradient( to top right, #000000, #555555)'; header.style.borderColor = '#ffffff'; });
-  
-      }
-     bg = !bg;});
+    { yinyang.innerText = '☀️'; }
+    
+    else { yinyang.innerText = '🌙'; } }); 
      
    </script>
     
